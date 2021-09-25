@@ -1,0 +1,52 @@
+<div *ngIf = "employeesList.length == 0 ">
+    <h2>No Employees Found</h2>
+</div>
+<div style="margin: 50px;" *ngIf = "employeesList.length > 0 " >
+    <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Employee ID</th>
+          <th scope="col">Employee Name</th>
+          <th scope="col">Employee Department</th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let employee of employeesList; index as i">
+          <th scope="row">{{ employee.id }}</th>
+          <td>
+            {{ employee.name }}
+          </td>
+          <td>{{ employee.department.name}}</td>
+          <td>
+            <button type="button" class="btn btn-primary" (click)="editEmployee(employee)">Edit Employee</button>
+             <button type="button" class="btn btn-danger" (click)="clickMethod(employee.name, employee.id)">Delete Employee</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <ng-template #deleteEmployee let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title">Delete</h4>
+          <button
+            type="button"
+            class="close"
+            aria-label="Close"
+            (click)="d('Cross click')"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h3>Are You Sure You Want To Delete This Employee?</h3>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="c('Close click')">
+           Close
+          </button>
+          <button class="btn btn-danger" click="deleteEmployee()" >
+           Delete
+          </button>
+        </div>
+      </ng-template>
