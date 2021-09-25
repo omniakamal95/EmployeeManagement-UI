@@ -12,10 +12,12 @@ export class AddEmployeeComponent implements OnInit {
   addEmployeeForm: FormGroup = new FormGroup({});
   employeeData: any;
   editEmployee = false;
+  departments : any;
   constructor(private fb: FormBuilder,private activatedRoute: ActivatedRoute,private employeesService: EmployeesService, private router: Router) { }
 
   ngOnInit(): void {
     this.initForm();
+    this.getDepartments()
     this.activatedRoute.queryParams.subscribe(params => {
       if (params.employee!=null || params.employee!=undefined){
         console.log(params.employee)
@@ -68,5 +70,10 @@ export class AddEmployeeComponent implements OnInit {
     }
   reload(){
     window.location.reload();
+  }
+  async getDepartments(){
+    await this.employeesService.getDepartmentsForEmployees().then((res:any)=>{
+      this.departments = res.returnObjectList;
+    })
   }
 }

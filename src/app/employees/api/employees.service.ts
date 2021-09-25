@@ -21,4 +21,8 @@ export class EmployeesService {
     return this.http.delete(`${this.baseUrl}/Employees/DeleteEmployee?Id=${employeeId}`).toPromise();
 
   }
+  getDepartmentsForEmployees(){
+    return this.http.get(`${this.baseUrl}/Departments/GetDepartments`).toPromise();
+
+  }
 }

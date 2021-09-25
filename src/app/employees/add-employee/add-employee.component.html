@@ -18,10 +18,10 @@
     
               <label>Department: </label>
               <select formControlName="departmentId" type="select">
-                <option value="1">Finance</option>
-               <option value="2">Marketing</option>
-               <option value="3">IT</option>
-               <option value="4">Engineering</option>
+                  
+                <option *ngFor="let department of departments; let i = index" [value]="department.id">
+                    {{department.name}}
+                  </option>
                 </select>         <small class="text-danger"  
                       *ngIf=" addEmployeeForm.get('departmentId')?.errors?.required &&  addEmployeeForm.get('departmentId')?.touched"> Department Is Required
                     </small>
